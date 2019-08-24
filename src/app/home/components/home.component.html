@@ -1,7 +1,32 @@
-Home lives here ! 
-
-<div *ngFor="let article of articles">
-    {{article.author}}
-    {{article.publishedAt | date }}
-    <h2>{{article.title}}</h2>
-</div>
+<header>
+    <nav class="container">
+    </nav>
+</header>
+<main class="container">
+    <div> ARTICLES</div>
+    <article *ngFor="let article of articles">
+        <section class="section row" [routerLink]="['/article/', article.givenId]">
+            <div class="col-lg-3 col-12 section__image-list" *ngIf="article.urlToImage" [ngStyle]="{'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'}">
+            </div>
+            <div class="col-lg-3 col-12 section__image-list" *ngIf="!article.urlToImage" [ngStyle]="{'background': 'url(../../../assets/images/noImage.jpg) no-repeat 0 0 / cover'}">
+            </div>
+            <div class="col-lg-9 col-12">
+                <div>
+                    <span>
+                        <b>{{article.author}}</b>
+                    </span>
+                </div>
+                <div>
+                    {{article.publishedAt | date }}
+                </div>
+                <div>
+                    <h2>{{(article.title.length>69)? (article.title | slice:0:69)+'..':(article.title)}}</h2>
+                </div>
+                <div>
+                    {{(article.description.length>158)? (article.description |
+                    slice:0:158)+'..':(article.description)}}
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
