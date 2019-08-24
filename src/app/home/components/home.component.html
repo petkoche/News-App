@@ -9,21 +9,21 @@
         <div *ngIf="collapseFilters">
             <div>
                 Sort by :
-                <ng-template *ngFor="let button of langButtons">
-                    <button [ngClass]="[searchModel.sortBy == 'sortButtons.value' ? 
+                <ng-container *ngFor="let button of sortButtons">
+                    <button [ngClass]="[searchModel.sortBy == button.value ? 
                     'btn nav__btn-filters--selected' : 'btn nav__btn-filters']"
-                        (click)="filterSort('sortButtons.value')" type="button">{{sortButtons.key}}
+                        (click)="filterSort(button.value)" type="button">{{button.key}}
                     </button>
-                </ng-template>
+                </ng-container>
             </div>
             <div>
                 Filter language :
-                <ng-template *ngFor="let button of langButtons">
+                <ng-container *ngFor="let button of langButtons">
                     <button [ngClass]="[searchModel.language == button.value ?
                     'btn nav__btn-filters--selected' : 'btn nav__btn-filters']"
                         (click)="filterLanguage(button.value)" type="button">{{button.key}}
                     </button>
-                </ng-template>
+                </ng-container>
             </div>
             <div class="container row">
                 From :
@@ -40,6 +40,9 @@
         <p>
             <button class="btn nav__btn-more-filters" (click)="collapseFilter()" type="button">
                 More filters
+            </button>
+            <button class="btn nav__btn-clear-filters" (click)="clearFilters()" type="button">
+                    Clear filters
             </button>
         </p>
     </nav>

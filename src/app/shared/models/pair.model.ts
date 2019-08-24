@@ -1,4 +1,4 @@
-export class ButtonModel {
+export class PairModel {
     key: string
     value: string
 }
