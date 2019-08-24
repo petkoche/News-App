@@ -3,6 +3,7 @@ export class Article {
         id: string,
         name: string
     }
+    givenId: number
     author: string
     title: string
     description: string

@@ -1,0 +1,28 @@
+<header class="header">
+    <div class="container h-100 text-center">
+      <div class="col-12 header__cover" [ngStyle]="{'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'}">
+      </div>
+      <h1 class="header__text">{{article.title}}</h1>
+    </div>
+  </header>
+  
+  <article>
+    <section class="py-5">
+      <div class="container">
+        <div>
+          <span>
+            <b>{{article.author}}</b>
+          </span>
+        </div>
+        <div>
+          {{article.publishedAt | date }}
+        </div>
+        <p>{{article.content}}</p>
+        <div>
+          published by {{article.source.name }}
+        </div>
+        <p>full story <a href={{article.url}}>here</a></p>
+      </div>
+    </section>
+  </article>
+  
