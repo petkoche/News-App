@@ -1,5 +1,7 @@
 # NewsApp
 
+![News App Mobile Demo](https://i.imgur.com/tvyjoxo.gif)
+
 ###Challenge :
 
 Make and application with the following functionalities:
