@@ -7,6 +7,8 @@ export const environment = {
   newsApiUrl: 'https://newsapi.org/v2/everything',
   apikey: '51bb3060d9d14205916c8d45dd6efd0d',
   defaultSearchText: 'bitcoin',
+  defualtSortBy: 'publishedAt',
+  defaultLanguage: 'en',
   // required by the challenge description
   defaultPageSize: '10',
 };

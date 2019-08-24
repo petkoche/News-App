@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from 'src/app/shared/article.service';
 import { Article } from 'src/app/shared/models/article.model';
+import { SearchModel } from 'src/app/shared/models/search.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-home',
@@ -13,24 +15,22 @@ export class HomeComponent implements OnInit{
     constructor(private articleService: ArticleService){}
 
     articles: Article[] = [];
-    text: string = '';
-    sortBy: string = 'publishedAt'
-    from: Date;
-    to: Date;
-    language: string = 'en';
+    searchModel: SearchModel;
+
     collapseFilters: boolean = false;
     collapseSorts: boolean = false;
-    defaultSearchText: string = 'bitcoin';
-  
 
     ngOnInit() {
-        this.articleService.getArticles({}).subscribe(res =>{
+        this.searchModel = new SearchModel();
+        this.searchModel.sortBy = environment.defualtSortBy;
+        this.searchModel.language = environment.defaultLanguage;
+        this.articleService.getArticles({text: environment.defaultSearchText}).subscribe(res =>{
             this.articles = res.articles;
         })
     } 
     
     search() {
-        this.articleService.getArticles({text: this.text ? this.text : this.defaultSearchText, from: this.from, to: this.to, sortBy: this.sortBy, language: this.language})
+        this.articleService.getArticles(this.searchModel)
         .subscribe(res => {
           this.articles = res.articles;
         })
@@ -41,11 +41,11 @@ export class HomeComponent implements OnInit{
       }
     
       filterSort(sort: string) {
-        this.sortBy = sort;
+        this.searchModel.sortBy = sort;
       }
     
       filterLanguage(lang: string) {
-        this.language = lang;
+        this.searchModel.language = lang;
       }
     
     }
