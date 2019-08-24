@@ -3,6 +3,7 @@ import { ArticleService } from 'src/app/shared/article.service';
 import { Article } from 'src/app/shared/models/article.model';
 import { SearchModel } from 'src/app/shared/models/search.model';
 import { environment } from 'src/environments/environment';
+import { ButtonModel } from 'src/app/shared/models/language-button.model';
 
 @Component({
     selector: 'app-home',
@@ -12,13 +13,27 @@ import { environment } from 'src/environments/environment';
 
 export class HomeComponent implements OnInit{
 
-    constructor(private articleService: ArticleService){}
+    langButtons: ButtonModel[] = [
+      {key: 'DE', value:'de'},
+      {key: 'EN', value:'en'},
+      {key: 'ES', value:'es'},
+      {key: 'FR', value:'fr'},
+      {key: 'IT', value:'it'},
+    ]
+
+    sortButtons: ButtonModel[] = [
+      {key: 'Date', value:'publishedAt'},
+      {key: 'Relevance', value:'relevancy'},
+      {key: 'Popularity', value:'popularity'},
+    ]
 
     articles: Article[] = [];
     searchModel: SearchModel;
 
     collapseFilters: boolean = false;
     collapseSorts: boolean = false;
+
+    constructor(private articleService: ArticleService){ }
 
     ngOnInit() {
         this.searchModel = new SearchModel();

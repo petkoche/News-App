@@ -9,17 +9,21 @@
         <div *ngIf="collapseFilters">
             <div>
                 Sort by :
-                <button [ngClass]="[searchModel.sortBy == 'publishedAt' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterSort('publishedAt')" type="button">Date</button>
-                <button [ngClass]="[searchModel.sortBy == 'relevancy' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterSort('relevancy')" type="button">Relevance</button>
-                <button [ngClass]="[searchModel.sortBy == 'popularity' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterSort('popularity')" type="button">Popularity</button>
+                <ng-template *ngFor="let button of langButtons">
+                    <button [ngClass]="[searchModel.sortBy == 'sortButtons.value' ? 
+                    'btn nav__btn-filters--selected' : 'btn nav__btn-filters']"
+                        (click)="filterSort('sortButtons.value')" type="button">{{sortButtons.key}}
+                    </button>
+                </ng-template>
             </div>
             <div>
                 Filter language :
-                <button [ngClass]="[searchModel.language == 'de' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('de')" type="button">DE</button>
-                <button [ngClass]="[searchModel.language == 'en' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('en')" type="button">EN</button>
-                <button [ngClass]="[searchModel.language == 'es' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('es')" type="button">ES</button>
-                <button [ngClass]="[searchModel.language == 'fr' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('fr')" type="button">FR</button>
-                <button [ngClass]="[searchModel.language == 'it' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('it')" type="button">IT</button>
+                <ng-template *ngFor="let button of langButtons">
+                    <button [ngClass]="[searchModel.language == button.value ?
+                    'btn nav__btn-filters--selected' : 'btn nav__btn-filters']"
+                        (click)="filterLanguage(button.value)" type="button">{{button.key}}
+                    </button>
+                </ng-template>
             </div>
             <div class="container row">
                 From :
@@ -48,7 +52,7 @@
         {{searchModel.text}} ARTICLES</div>
     lagn : {{searchModel.language}}
     <span *ngIf='from'>/ from {{searchModel.from | date}}</span>
-    <span *ngIf='to'> to {{searchModel.to | date}}</span> 
+    <span *ngIf='to'> to {{searchModel.to | date}}</span>
     <article *ngFor="let article of articles">
         <section class="section row" [routerLink]="['/article/', article.givenId]">
             <div class="col-lg-3 col-12 section__image-list" *ngIf="article.urlToImage" [ngStyle]="{'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'}">
