@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ArticleResponse } from './models/article-respones.model';
+import { Router } from '@angular/router';
 import { Article } from './models/article.model';
 import { environment } from 'src/environments/environment';
 import { _ } from 'underscore';
@@ -12,7 +13,7 @@ import { _ } from 'underscore';
 })
 export class ArticleService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
     savedArticles: Article[] = [];
 
@@ -43,7 +44,9 @@ export class ArticleService {
     }
 
     getArticle(id: number): Article {
-        return this.savedArticles.find(article => article.givenId === +id);
+        let article = this.savedArticles.find(article => article.givenId === +id);
+        this.checkIfArticleExists(article);
+        return article;
     }
 
     private setId(result: ArticleResponse): ArticleResponse {
@@ -54,5 +57,11 @@ export class ArticleService {
         });
         this.savedArticles = result.articles;
         return result;
+    }
+
+    private checkIfArticleExists(article: Article) {
+        if(!article) {
+            this.router.navigate(['/home']);
+        }
     }
 }
