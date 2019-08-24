@@ -38,8 +38,7 @@ export class ArticleService {
         return this.http.get<ArticleResponse>(environment.newsApiUrl, httpOptions).pipe(
             tap(result => {
                 this.setId(result);
-            }),
-            catchError<ArticleResponse, never>(null)
+            })
         );
     }
 

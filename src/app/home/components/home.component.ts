@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
   collapseFilters: boolean = false;
   collapseSorts: boolean = false;
 
+  error:string;
+
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
