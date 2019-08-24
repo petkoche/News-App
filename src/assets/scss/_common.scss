@@ -1,0 +1,23 @@
+$light-blue: #4dd0e1;
+$gray: #999;
+
+@mixin common-element-style {
+  border: none;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  color: black;
+  border-bottom: 1px solid $gray;
+  border-radius: 0;
+  @content;
+}
+
+.common-button-shadow {
+  outline: none;
+  -webkit-box-shadow: 10px 0px 36px 12px rgba(235, 235, 235, 1);
+  -moz-box-shadow: 10px 0px 36px 12px rgba(235, 235, 235, 1);
+  box-shadow: 10px 0px 36px 12px rgba(235, 235, 235, 1);
+  border-bottom: 2px solid $light-blue;
+}

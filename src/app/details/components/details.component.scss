@@ -1,0 +1,40 @@
+@import "../../../assets/scss/common";
+
+.header {
+  padding: 50px 0 30px 0;
+  position: relative;
+
+  &__text {
+    position: relative; /* Added */
+    padding: 20px 0;
+    color: white;
+    text-shadow: 0 0 3px #333, 0 0 5px #333;
+  }
+
+  &__cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    filter: blur(3px);
+  }
+}
+
+.article {
+  &__light-text {
+    color: #8b8d91;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+
+  &__btn {
+    @include common-element-style {
+      margin: 10px 0 10px;
+    }
+
+    &:focus {
+      box-shadow: 0px 0px 0px 0px rgba(235, 235, 235, 1);
+    }
+  }
+}

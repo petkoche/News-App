@@ -1,6 +1,9 @@
 <header class="header">
     <div class="container h-100 text-center">
-      <div class="col-12 header__cover" [ngStyle]="{'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'}">
+      <div class="col-12 header__cover" 
+        [ngStyle]="article.urlToImage ?
+         {'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'} :
+         {'background': 'url(../../../assets/images/noImage.jpg) no-repeat 0 0 / cover'}">
       </div>
       <h1 class="header__text">{{article.title}}</h1>
     </div>
@@ -14,16 +17,18 @@
             <b>{{article.author}}</b>
           </span>
         </div>
-        <div>
+        <div class="article__light-text">
           {{article.publishedAt | date }}
         </div>
         <p>{{article.content}}</p>
-        <div>
+        <div class="article__light-text">
           published by {{article.source.name }}
         </div>
-        <p>full story <a href={{article.url}}>here</a></p>
+        <p>full story <a class="btn article__btn" href={{article.url}}>here</a></p>
+        <button class="btn article__btn" [routerLink]="['/home']" type="button">
+            Go Back
+        </button>
       </div>
-      <button [routerLink]="['/home']" type="button">Go Back</button>
     </section>
   </article>
   

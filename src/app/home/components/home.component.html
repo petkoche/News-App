@@ -3,32 +3,32 @@
         <div class="md-form input-group">
             <input type="text" name="text" [(ngModel)]="searchModel.text" id="form1" class="form-control" placeholder="Search">
             <span class="input-group-btn">
-                <button class="btn" (click)="search()" type="button">Go!</button>
+                <button class="btn nav__button" (click)="search()" type="button">Go!</button>
             </span>
         </div>
         <div *ngIf="collapseFilters">
             <div>
                 Sort by :
-                <button (click)="filterSort('publishedAt')" type="button">Date</button>
-                <button (click)="filterSort('relevancy')" type="button">Relevance</button>
-                <button (click)="filterSort('popularity')" type="button">Popularity</button>
+                <button [ngClass]="[searchModel.sortBy == 'publishedAt' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterSort('publishedAt')" type="button">Date</button>
+                <button [ngClass]="[searchModel.sortBy == 'relevancy' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterSort('relevancy')" type="button">Relevance</button>
+                <button [ngClass]="[searchModel.sortBy == 'popularity' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterSort('popularity')" type="button">Popularity</button>
             </div>
             <div>
                 Filter language :
-                <button (click)="filterLanguage('de')" type="button">DE</button>
-                <button (click)="filterLanguage('en')" type="button">EN</button>
-                <button (click)="filterLanguage('es')" type="button">ES</button>
-                <button (click)="filterLanguage('fr')" type="button">FR</button>
-                <button (click)="filterLanguage('it')" type="button">IT</button>
+                <button [ngClass]="[searchModel.language == 'de' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('de')" type="button">DE</button>
+                <button [ngClass]="[searchModel.language == 'en' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('en')" type="button">EN</button>
+                <button [ngClass]="[searchModel.language == 'es' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('es')" type="button">ES</button>
+                <button [ngClass]="[searchModel.language == 'fr' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('fr')" type="button">FR</button>
+                <button [ngClass]="[searchModel.language == 'it' ? 'btn nav__btn-filters--selected' : 'btn nav__btn-filters']" (click)="filterLanguage('it')" type="button">IT</button>
             </div>
             <div class="container row">
                 From :
                 <div class="col-xs-12 col-12 col-md-4 form-group">
-                    <input type="text" placeholder="From" class="form-control" bsDatepicker [(ngModel)]="from">
+                    <input type="text" placeholder="From" class="form-control" bsDatepicker [(ngModel)]="searchModel.from">
                 </div>
                 To :
                 <div class="col-xs-12 col-12 col-md-4 form-group">
-                    <input type="text" placeholder="To" class="form-control" bsDatepicker [(ngModel)]="to">
+                    <input type="text" placeholder="To" class="form-control" bsDatepicker [(ngModel)]="searchModel.to">
 
                 </div>
             </div>
@@ -41,23 +41,27 @@
     </nav>
 </header>
 <main class="container">
-    <div> ARTICLES</div>
-    lagn : {{language}}
-    <span *ngIf='from'>/ from {{from | date}}</span>
-    <span *ngIf='to'> to {{to | date}}</span> 
+    <div class="main__title">
+        <span *ngIf='searchModel.sortBy == "publishedAt"'>THE LATEST </span>
+        <span *ngIf='searchModel.sortBy == "relevancy"'>THE MOST RELEVANT </span>
+        <span *ngIf='searchModel.sortBy == "popularity"'>THE MOST POPULAR </span>
+        {{searchModel.text}} ARTICLES</div>
+    lagn : {{searchModel.language}}
+    <span *ngIf='from'>/ from {{searchModel.from | date}}</span>
+    <span *ngIf='to'> to {{searchModel.to | date}}</span> 
     <article *ngFor="let article of articles">
-        <section class="row" [routerLink]="['/article/', article.givenId]">
-            <div class="col-lg-3 col-12" *ngIf="article.urlToImage" [ngStyle]="{'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'}">
+        <section class="section row" [routerLink]="['/article/', article.givenId]">
+            <div class="col-lg-3 col-12 section__image-list" *ngIf="article.urlToImage" [ngStyle]="{'background': 'url(' + article.urlToImage + ') no-repeat 0 0 / cover'}">
             </div>
-            <div class="col-lg-3 col-12" *ngIf="!article.urlToImage" [ngStyle]="{'background': 'url(../../../assets/images/noImage.jpg) no-repeat 0 0 / cover'}">
+            <div class="col-lg-3 col-12 section__image-list" *ngIf="!article.urlToImage" [ngStyle]="{'background': 'url(../../../assets/images/noImage.jpg) no-repeat 0 0 / cover'}">
             </div>
-            <div class="col-lg-9 col-12">
+            <div class="section__brief col-lg-9 col-12">
                 <div>
                     <span>
                         <b>{{article.author}}</b>
                     </span>
                 </div>
-                <div>
+                <div class="section__timestamp">
                     {{article.publishedAt | date }}
                 </div>
                 <div>
