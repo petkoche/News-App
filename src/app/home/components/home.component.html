@@ -1,11 +1,11 @@
 <header>
     <nav class="container">
-        <div class="md-form input-group">
+        <form #myForm="ngForm" (ngSubmit)="search()" novalidate class="md-form input-group">        
             <input type="text" name="text" [(ngModel)]="searchModel.text" id="form1" class="form-control" placeholder="Search">
             <span class="input-group-btn">
                 <button class="btn nav__button" (click)="search()" type="button">Go!</button>
             </span>
-        </div>
+        </form>
         <div *ngIf="collapseFilters">
             <div>
                 Sort by :
@@ -28,12 +28,15 @@
             <div class="container row">
                 From :
                 <div class="col-xs-12 col-12 col-md-4 form-group">
-                    <input type="text" placeholder="From" class="form-control" bsDatepicker [(ngModel)]="searchModel.from">
+                    <input type="text" placeholder="From" class="form-control" 
+                    bsDatepicker [(ngModel)]="searchModel.from" 
+                    [bsConfig]="{ containerClass: 'theme-default' }">
                 </div>
                 To :
                 <div class="col-xs-12 col-12 col-md-4 form-group">
-                    <input type="text" placeholder="To" class="form-control" bsDatepicker [(ngModel)]="searchModel.to">
-
+                    <input type="text" placeholder="To" class="form-control"
+                    bsDatepicker [(ngModel)]="searchModel.to"
+                    [bsConfig]="{ containerClass: 'theme-default' }">
                 </div>
             </div>
         </div>

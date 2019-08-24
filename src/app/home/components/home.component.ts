@@ -57,14 +57,17 @@ export class HomeComponent implements OnInit {
 
   filterSort(sort: string) {
     this.searchModel.sortBy = sort;
+    this.search();
   }
 
   filterLanguage(lang: string) {
     this.searchModel.language = lang;
+    this.search();
   }
 
   clearFilters() {
     this.searchModel = new SearchModel();
+    this.search();
   }
 
 }

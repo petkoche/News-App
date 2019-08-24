@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ArticleResponse } from './models/article-respones.model';
 import { Router } from '@angular/router';
@@ -22,8 +22,8 @@ export class ArticleService {
 
         if (!_.isUndefined(parameters)) {
             params = _.isUndefined(parameters.text) || parameters.text == '' ? params.append('q', environment.defaultSearchText) : params.append('q', parameters.text);
-            params = _.isUndefined(parameters.from) ? params : params.append('from', JSON.stringify(parameters.from));
-            params = _.isUndefined(parameters.to) ? params : params.append('to', JSON.stringify(parameters.to));
+            params = _.isUndefined(parameters.from) ? params : params.append('from', eval(JSON.stringify(parameters.from)));
+            params = _.isUndefined(parameters.to) ? params : params.append('to', eval(JSON.stringify(parameters.to)));
             params = _.isUndefined(parameters.sortBy) ? params.append('sortBy', environment.defualtSortBy) : params.append('sortBy', parameters.sortBy);
             params = _.isUndefined(parameters.language) ? params : params.append('language', parameters.language);
         }
