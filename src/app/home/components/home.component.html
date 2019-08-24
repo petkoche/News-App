@@ -1,1 +1,7 @@
 Home lives here ! 
+
+<div *ngFor="let article of articles">
+    {{article.author}}
+    {{article.publishedAt | date }}
+    <h2>{{article.title}}</h2>
+</div>

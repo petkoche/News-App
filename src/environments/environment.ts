@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   newsApiUrl: 'https://newsapi.org/v2/everything',
-  apikey: '51bb3060d9d14205916c8d45dd6efd0d'
+  apikey: '51bb3060d9d14205916c8d45dd6efd0d',
+  defaultSearchText: 'bitcoin',
+  // required by the challenge description
+  defaultPageSize: '10',
 };
 
 /*
